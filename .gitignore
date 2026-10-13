@@ -14,6 +14,9 @@ client/.env.*
 !client/.env.example
 server/.env
 server/.env.*
+tmp/
+temp/
+server/tmp/
 server/temp/*
 server/temp
 !server/.env.example
