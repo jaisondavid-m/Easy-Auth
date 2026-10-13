@@ -99,3 +99,55 @@ func Register(c *gin.Context) {
 	})
 
 }
+
+func Login(c *gin.Context) {
+
+	var req dto.LoginRequest
+
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":"Invalid login Details",
+		})
+		return
+	}
+
+	email := strings.ToLower(strings.TrimSpace(req.Email))
+
+	var user models.User
+
+	if err := config.DB.Where("email = ?", email).First(&user).Error; err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"error":"Invalid email or password",
+		})
+		return
+	}
+
+	if user.PasswordHash == "" ||
+		!services.CheckPassword(user.PasswordHash, req.Password) {
+			c.JSON(http.StatusUnauthorized, gin.H{
+				"error":"Invalid email or password",
+			})
+			return
+	}
+
+	token, err := services.GenerateToken(user.ID)
+
+	if err != nil {
+		log.Printf("Token generation failed: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":"Could not create token",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"message":"Login Successful",
+		"token": token,
+		"user": gin.H{
+			"id": user.ID,
+			"name": user.Name,
+			"email": user.Email,
+		},
+	})
+
+}
