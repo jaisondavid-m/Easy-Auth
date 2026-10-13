@@ -1,6 +1,8 @@
 package routes
 
 import (
+	// "net/http"
+	"server/handlers"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,5 +18,9 @@ func SetupRoutes() *gin.Engine {
 			"status":"ok",
 		})
 	})
+	auth := r.Group("/api/v1/auth")
+	{
+		auth.POST("/register", handlers.Register)
+	}
 	return r
 }

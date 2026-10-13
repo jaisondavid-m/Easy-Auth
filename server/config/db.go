@@ -1,10 +1,12 @@
 package config
 
 import (
-	"os"
 	"log"
-	"gorm.io/gorm"
+	"os"
+	"server/models"
+
 	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
 var DB *gorm.DB
@@ -17,6 +19,16 @@ func ConnectDB() {
 	db, err := gorm.Open(mysql.Open(dsn),&gorm.Config{})
 	if err != nil {
 		log.Fatal("Failed to connect to database:",err)
+	}
+	sqlDB, err := db.DB()
+	if err != nil {
+		log.Fatal("Failed to get SQL database: ",err)
+	}
+	if err := sqlDB.Ping(); err != nil {
+		log.Fatal("Database ping failed: ",err)
+	}
+	if err := db.AutoMigrate(&models.User{}); err != nil {
+		log.Fatal("Database migration failed: ",err)
 	}
 	DB = db
 	log.Println("Database connected successfully")
