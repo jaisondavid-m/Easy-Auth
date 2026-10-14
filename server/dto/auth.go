@@ -10,3 +10,7 @@ type LoginRequest struct {
 	Email string `json:"email" binding:"required,email,max=255"`
 	Password string `json:"password" binding:"required,min=3,max=72"`
 }
+
+type GoogleLoginRequest struct {
+	IDToken string `json:"id_token" binding:"required"`
+}
