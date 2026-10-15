@@ -1,15 +1,35 @@
 package routes
 
 import (
-	// "net/http"
+	"net/http"
 	"server/handlers"
 	"server/middleware"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func SetupRoutes() *gin.Engine {
 	r := gin.Default()
+	r.Use(cors.New(cors.Config{
+		AllowOrigins: []string{
+			"http://localhost:5173",
+		},
+		AllowMethods: []string{
+			http.MethodGet,
+			http.MethodPost,
+			http.MethodPut,
+			http.MethodPatch,
+			http.MethodDelete,
+			http.MethodOptions,
+		},
+		AllowHeaders: []string{
+			"Origin",
+			"Content-Type",
+			"Accept",
+			"Authorization",
+		},
+	}))
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200,gin.H{
 			"message":"Server API is running",
