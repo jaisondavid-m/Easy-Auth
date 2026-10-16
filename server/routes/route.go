@@ -56,5 +56,9 @@ func SetupRoutes() *gin.Engine {
 	{
 		projects.POST("",handlers.CreateProject)
 	}
+	projectAuth := r.Group("/api/v1/projects/:projectID/auth")
+	{
+		projectAuth.POST("/register", handlers.ProjectRegister)
+	}
 	return r
 }
