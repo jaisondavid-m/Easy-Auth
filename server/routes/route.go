@@ -55,6 +55,7 @@ func SetupRoutes() *gin.Engine {
 	projects.Use(middleware.AuthMiddleware())
 	{
 		projects.POST("",handlers.CreateProject)
+		projects.GET("", handlers.GetMyProjects)
 	}
 	projectAuth := r.Group("/api/v1/projects/:projectID/auth")
 	{

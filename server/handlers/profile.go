@@ -50,3 +50,4 @@ func Profile(c *gin.Context) {
 	})
 
 }
+

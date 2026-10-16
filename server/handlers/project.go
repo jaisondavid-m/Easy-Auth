@@ -62,3 +62,30 @@ func CreateProject(c *gin.Context) {
 		},
 	})
 }
+
+func GetMyProjects(c *gin.Context) {
+
+	userID, exists := c.Get("userID")
+
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"error": "Unauthorized",
+		})
+		return
+	}
+
+	var projects []models.Project
+
+	if err := config.DB.Where("owner_id = ?",userID).Order("created_at DESC").Find(&projects).Error;
+
+	err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "Could not fetch projects",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"projects": projects,
+	})
+}
