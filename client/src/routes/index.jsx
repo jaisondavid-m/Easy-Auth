@@ -10,6 +10,8 @@ import Dashboard from "../pages/Dashboard.jsx"
 import PublicRoute from "./PublicRoute.jsx"
 import ProctectedRoute from "./ProctedRoute.jsx"
 
+import MainLayout from "../Layout/MainLayout.jsx"
+
 export const router = createBrowserRouter([
     {
         element: <PublicRoute />,
@@ -28,8 +30,13 @@ export const router = createBrowserRouter([
         element: <ProctectedRoute/>,
         children: [
             {
-                path: "/dashboard",
-                element: <Dashboard/>,
+                element: <MainLayout/>,
+                children: [
+                    {
+                        path: "/dashboard",
+                        element: <Dashboard/>
+                    }
+                ]
             },
         ],
     },
