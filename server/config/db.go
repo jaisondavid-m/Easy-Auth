@@ -27,7 +27,11 @@ func ConnectDB() {
 	if err := sqlDB.Ping(); err != nil {
 		log.Fatal("Database ping failed: ",err)
 	}
-	if err := db.AutoMigrate(&models.User{}); err != nil {
+	if err := db.AutoMigrate(
+		&models.User{},
+		&models.Project{},
+		&models.ProjectUser{},
+	); err != nil {
 		log.Fatal("Database migration failed: ",err)
 	}
 	DB = db
