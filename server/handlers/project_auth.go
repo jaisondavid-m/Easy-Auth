@@ -109,3 +109,60 @@ func ProjectRegister(c *gin.Context) {
 	})
 
 }
+
+func ProjectLogin(c *gin.Context) {
+
+	var req dto.ProjectLoginRequest
+
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":"Invalid login details",
+		})
+		return
+	}
+
+	req.Email = strings.ToLower(strings.TrimSpace(req.Email))
+
+	if !services.FindProject(c) {
+		return
+	}
+
+	projectID := c.Param("projectID")
+
+	var user models.ProjectUser
+	err := config.DB.Where(
+		"project_id = ? AND email = ?",
+		projectID,
+		req.Email,
+	).First(&user).Error
+
+	if err != nil || user.PasswordHash == "" ||
+		!services.CheckPassword(user.PasswordHash, req.Password) {
+			c.JSON(http.StatusUnauthorized, gin.H{
+				"error": "Invalid email or password",
+			})
+			return
+		}
+
+	token, err := services.GenerateProjectUserToken(user.ID,projectID)
+
+	if err != nil {
+		log.Printf("Project token generation failed: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "Could not create token",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Login successful",
+		"token": token,
+		"user": gin.H{
+			"id": user.ID,
+			"name": user.Name,
+			"email": user.Email,
+		},
+	})
+
+
+}
