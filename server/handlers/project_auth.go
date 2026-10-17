@@ -21,6 +21,10 @@ func ProjectRegister(c *gin.Context) {
 
 	var req dto.ProjectRegisterRequest
 
+	if !services.ValidateProjectOrigins(c) {
+		return
+	}
+
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Invalid registration details",
@@ -113,6 +117,10 @@ func ProjectRegister(c *gin.Context) {
 func ProjectLogin(c *gin.Context) {
 
 	var req dto.ProjectLoginRequest
+
+	if !services.ValidateProjectOrigins(c) {
+		return
+	}
 
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
