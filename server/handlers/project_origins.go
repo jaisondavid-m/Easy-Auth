@@ -72,9 +72,9 @@ func UpdateProjectOrigins(c *gin.Context) {
 		return
 	}
 
-	if len(req.Origins) == 0 || len(req.Origins) > 5 {
+	if len(req.Origins) > 5 {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Provide between 1 and 5 origins",
+			"error": "you can add a maximum of 5 origins",
 		})
 		return
 	}
