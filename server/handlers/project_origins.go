@@ -1,9 +1,11 @@
 package handlers
 
 import (
+	"log"
 	"net/http"
 	"net/url"
 	"strings"
+	"encoding/json"
 
 	"server/config"
 	"server/dto"
@@ -88,6 +90,7 @@ func UpdateProjectOrigins(c *gin.Context) {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": "Invalid origin: " + value,
 			})
+			return
 		}
 		if !seen[origin] {
 			origins = append(origins,origin)
@@ -95,7 +98,17 @@ func UpdateProjectOrigins(c *gin.Context) {
 		}
 	}
 
-	if err := config.DB.Model(&project).Update("allowed_origins", origins).Error; err != nil {
+	originsJSON, err := json.Marshal(origins)
+	if err != nil {
+		log.Printf("Failed to encode origins: %v",err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":"Could not encode origins",
+		})
+		return
+	}
+
+	if err := config.DB.Model(&project).Update("allowed_origins", string(originsJSON)).Error; err != nil {
+		log.Printf("Failed to update project origin: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "Could not update origins",
 		})

@@ -104,6 +104,7 @@ export default function Projects() {
                                 <ProjectCard
                                     key={project.id}
                                     project={project}
+                                    onUpdated={fetchProjects}
                                 />
                             ))}
                         </div>
