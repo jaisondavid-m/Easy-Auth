@@ -21,7 +21,7 @@ export default function Navbar() {
 
     return (
         <header className="sticky top-0 z-50 w-full border-b border-border bg-card" >
-            <nav className="flex w-full items-center gap-12 px-5 py-4 sm:px-8 lg:px-12" >
+            <nav className="relative flex w-full items-center justify-between px-5 py-4 sm:px-8 lg:px-12" >
                 <Link to="/" className="flex items-center gap-3" >
                     <span className="grid h-10 w-10 place-items-center rounded-xl bg-accent text-black" >
                         <ShieldCheck size={23} />
@@ -30,7 +30,7 @@ export default function Navbar() {
                         EC-Auth
                     </span>
                 </Link>
-                <div className="ml-auto flex items-center gap-4" >
+                <div className="absolute left-1/2 flex -transalte-x-1/2 items-center gap-4" >
                     <NavLink
                         to="/dashboard"
                         className={navClass}
@@ -42,11 +42,11 @@ export default function Navbar() {
                         to="/projects"
                         className={navClass}
                     >
-                        <FolderKanban size={18}/>
+                        <FolderKanban size={18} />
                         <span>Projects</span>
                     </NavLink>
 
-                    {user && (
+                    {/* {user && (
                         <div className="hidden text-right sm:block" >
                             <p className="text-sm font-semibold" >
                                 {user.name}
@@ -55,16 +55,17 @@ export default function Navbar() {
                                 {user.email}
                             </p>
                         </div>
-                    )}
-                    <button
-                        onClick={handleLogout}
-                        className="flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-medium
-                        transition hover:bg-input"
-                    >
-                        <LogOut size={17} />
-                        <span className="hidden sm:inline" >Logout</span>
-                    </button>
+                    )} */}
+
                 </div>
+                <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-medium
+                        transition hover:bg-input"
+                >
+                    <LogOut size={17} />
+                    <span className="hidden sm:inline" >Logout</span>
+                </button>
             </nav>
         </header>
     )

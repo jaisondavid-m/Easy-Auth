@@ -91,6 +91,11 @@ func SetupRoutes() *gin.Engine {
 		projects.POST("",handlers.CreateProject)
 		projects.GET("", handlers.GetMyProjects)
 		projects.PUT("/:projectID/origins", handlers.UpdateProjectOrigins)
+		projects.GET("/:projectID/users", handlers.ListProjectUsers)
+		projects.POST("/:projectID/users", handlers.CreateProjectUser)
+		projects.PUT("/:projectID/users/:userID", handlers.UpdateProjectUser)
+		projects.PATCH("/:projectID/users/:userID/password",handlers.UpdateProjectUserPassword)
+		projects.DELETE("/:projectID/users/:userID",handlers.DeleteProjectUser)
 	}
 	projectAuth := r.Group("/api/v1/projects/:projectID/auth")
 	{
