@@ -7,6 +7,7 @@ import Login from "../pages/Login.jsx"
 import Register from "../pages/Register.jsx"
 import Dashboard from "../pages/Dashboard.jsx"
 import Projects from "../pages/Projects.jsx"
+import ProjectUsers from "../pages/ProjectUsers.jsx"
 
 import PublicRoute from "./PublicRoute.jsx"
 import ProctectedRoute from "./ProctedRoute.jsx"
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
                     {
                         path: "/projects",
                         element: <Projects/>
+                    },
+                    {
+                        path: "/project/users",
+                        element: <ProjectUsers/>
                     }
                 ]
             },
