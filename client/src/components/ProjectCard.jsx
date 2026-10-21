@@ -210,7 +210,10 @@ export default function ProjectCard({ project, onUpdated }) {
                 </div>
                 <button
                     type="button"
-                    onClick={openEditor}
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        openEditor()
+                    }}
                     className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-border px-4 py-3 text-sm font-medium transition hover:border-accent/50 hover:bg-input"
                 >
                     <Globe size={17} />
