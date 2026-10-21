@@ -1,9 +1,11 @@
 import React, { useState } from "react"
-import { Folder, Globe, ArrowUpRight, Copy, Check, Plus, Pencil, Trash2, X, Save, LoaderCircle } from "lucide-react"
+import { Folder, Globe, ArrowUpRight, Copy, Check, Plus, Pencil, Trash2, X, Save, LoaderCircle, ProjectorIcon } from "lucide-react"
 import api from "../api/axios.js"
 import EditingModal from "./EditingModal.jsx"
+import { useNavigate } from "react-router-dom"
 
 export default function ProjectCard({ project, onUpdated }) {
+    const navigate = useNavigate()
     const [editing, setEditing] = useState(false)
     const [origins, setOrigins] = useState(
         project.allowed_origins ?? []
@@ -143,8 +145,24 @@ export default function ProjectCard({ project, onUpdated }) {
         }
     }
 
+    const openProjectUsers = () => {
+        navigate(`/project/users?projectId=${encodeURIComponent(project.id)}`)
+    }
+
     return (
-        <div>
+        <div
+            onClick={openProjectUsers}
+            role="link"
+            tabIndex={0}
+            className="cursor-pointer"
+            onKeyDown={(e) => {
+                if (e.target !== e.currentTarget) return 
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault()
+                    openProjectUsers()
+                } 
+            }}
+        >
             <article className="rounded-2xl border border-border bg-card p-5 transition hover:border-accent/50" >
                 <div className="flex items-start justify-between" >
                     <div className="grid h-12 w-12 place-items-center rounded-xl border border-border bg-input" >
@@ -178,7 +196,10 @@ export default function ProjectCard({ project, onUpdated }) {
                     </div>
                     <button
                         type="button"
-                        onClick={copyID}
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            copyID()
+                        }}
                         title="Copy project ID"
                         className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-accent transition hover:bg-accent/10"
                     >

@@ -118,7 +118,7 @@ export default function ProjectUsers() {
             } else if (modal === "edit") {
                 await api.put(`${base}/${selectedUser.id}`, {
                     name: form.name.trim(),
-                    email: form.name.trim(),
+                    email: form.email.trim(),
                 })
                 setNotice("User details updated successfully")
             } else if (modal === "password") {
@@ -265,13 +265,107 @@ export default function ProjectUsers() {
                     </label>
                 </div>
                 {loading ? (
-                    <div></div>
+                    <div className="flex items-center justify-center gap-3 p-12 text-muted" >
+                        <LoaderCircle className="animate-spin" size={20} />
+                        Loading users...
+                    </div>
                 ) : error && users.length === 0 ? (
-                    <div></div>
+                    <div className="p-8 text-center" >
+                        <p className="text-red-400" >{error}</p>
+                        <button
+                            type="button"
+                            onClick={loadUsers}
+                            className="mt-4 text-accent hover:underline"
+                        >
+                            Try again
+                        </button>
+                    </div>
                 ) : filteredUsers.length === 0 ? (
-                    <div></div>
+                    <div className="p-12 text-center" >
+                        <Users size={32} className="mx-auto mb-3 text-muted" />
+                        <h3 className="font-semibold" >
+                            {search ? "No matching users" : "No users yet"}
+                        </h3>
+                        <p className="mt-2 text-sm text-muted" >
+                            {
+                                search
+                                    ? "Try another search."
+                                    : "Add a user or wait for someone to register through your application"
+                            }
+                        </p>
+                    </div>
                 ) : (
-                    <div></div>
+                    <div className="overflow-x-auto" >
+                        <table className="w-full text-left text-sm" >
+                            <thead className="border-b border-border text-muted" >
+                                <tr>
+                                    <th className="whitespace-nowrap p-4" >User</th>
+                                    <th className="p-4" >Email</th>
+                                    <th className="whitespace-nowrap p-4" >Created</th>
+                                    <th className="p-4" >Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {filteredUsers.map((user) => (
+                                    <tr
+                                        key={user.id}
+                                        className="border-b border-border last:border-0 hover:bg-input/30"
+                                    >
+                                        <td className="p-4" >
+                                            <div className="flex items-center gap-3" >
+                                                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent/10 font-bold text-accent" >
+                                                    {user.name.charAt(0).toLowerCase()}
+                                                </div>
+                                                <div>
+                                                    <p className="font-semibold" >{user.name}</p>
+                                                    <p className="mt-1 text-xs text-muted" >
+                                                        ID: {user.id}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="p-4" >{user.email}</td>
+                                        <td className="whitespace-nowrap p-4 text-muted" >
+                                            {user.created_at
+                                                ? new Date(user.created_at).toLocaleDateString()
+                                                : "-"
+                                            }
+                                        </td>
+                                        <td className="p-4" >
+                                            <div className="flex flex-wrap gap-2" >
+                                                <button
+                                                    type="button"
+                                                    title="Edit name and email"
+                                                    onClick={() => openEdit(user)}
+                                                    disabled={busy}
+                                                    className="rounded-lg border border-border p-2 transition hover:bg-input disabled:opacity-50"
+                                                >
+                                                    <Pencil size={16} />
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    title="Update password"
+                                                    onClick={() => openPassword(user)}
+                                                    className="rounded-lg border border-border p-2 text-accent transition hover:bg-input disabled:opacity-50"
+                                                >
+                                                    <KeyRound size={16} />
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    title="Delete user"
+                                                    onClick={() => deleteUser(user)}
+                                                    disabled={busy}
+                                                    className="rounded-lg border border-red-500/30 p-2 text-red-400 transition hover:bg-red-500/10 disabled:opacity-50"
+                                                >
+                                                    <Trash2 size={16} />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 )}
             </section>
             {modal && (
@@ -370,7 +464,7 @@ export default function ProjectUsers() {
                                 </p>
                                 <Field
                                     label="New password"
-                                    name="name"
+                                    name="password"
                                     type="password"
                                     value={form.password}
                                     onChange={updateField}
