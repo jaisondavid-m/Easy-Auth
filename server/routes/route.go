@@ -19,7 +19,7 @@ func SetupRoutes() *gin.Engine {
 			strings.TrimSpace(c.GetHeader("Origin")),
 			"/",
 		)
-		allowed := origin == "http://localhost:5173"
+		allowed := origin == "https://ec.bitsathy.in"
 
 		if strings.HasPrefix(c.Request.URL.Path, "/api/v1/projects/") &&
 			strings.Contains(c.Request.URL.Path, "/auth/") &&
