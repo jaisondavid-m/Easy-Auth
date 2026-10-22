@@ -12,7 +12,7 @@ FROM alpine:3.22
 
 WORKDIR /app
 
-COPY --form=build /app/server .
+COPY --from=build /app/server .
 
 EXPOSE 8080
 
