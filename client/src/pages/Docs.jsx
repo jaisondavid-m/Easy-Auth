@@ -12,7 +12,7 @@ import {
     AlertCircle,
 } from "lucide-react"
 
-const API_URL = "https://ecauth.bitsathy.in"
+const API_URL = "https://ec.bitsathy.in"
 
 const sections = [
     { id: "quick-start", label: "Getting started" },
@@ -31,7 +31,7 @@ const snippets = {
 import axios from "axios"
 
 export const ecAuth = axios.create({
-    baseURL: "https://ecauth.bitsathy.in/api/v1",
+    baseURL: "https://ec.bitsathy.in/api/v1",
     headers: {
         "Content-Type": "application/json",
     },
