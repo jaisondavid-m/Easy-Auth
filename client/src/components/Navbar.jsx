@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, NavLink, useNavigate } from "react-router-dom"
-import { ShieldCheck, LayoutDashboard, LogOut, FolderKanban } from "lucide-react"
+import { ShieldCheck, LayoutDashboard, LogOut, FolderKanban, BookOpen } from "lucide-react"
 import { useAuth } from "../context/AuthContext.jsx"
 
 export default function Navbar() {
@@ -44,6 +44,10 @@ export default function Navbar() {
                     >
                         <FolderKanban size={18} />
                         <span>Projects</span>
+                    </NavLink>
+                    <NavLink to="/docs" className={navClass} >
+                        <BookOpen size={18} />
+                        <span>DOCS</span>
                     </NavLink>
 
                     {/* {user && (

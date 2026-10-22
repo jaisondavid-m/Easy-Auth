@@ -8,6 +8,7 @@ import Register from "../pages/Register.jsx"
 import Dashboard from "../pages/Dashboard.jsx"
 import Projects from "../pages/Projects.jsx"
 import ProjectUsers from "../pages/ProjectUsers.jsx"
+import Docs from "../pages/Docs.jsx"
 
 import PublicRoute from "./PublicRoute.jsx"
 import ProctectedRoute from "./ProctedRoute.jsx"
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
                     {
                         path: "/project/users",
                         element: <ProjectUsers/>
+                    },
+                    {
+                        path: "/docs",
+                        element: <Docs/>
                     }
                 ]
             },
