@@ -3,7 +3,7 @@ services:
     build: ./client
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "8091:80"
     depends_on:
       - server
 
