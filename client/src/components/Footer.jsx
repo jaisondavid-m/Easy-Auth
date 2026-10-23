@@ -12,7 +12,7 @@ export default function Footer() {
                     </span>
                 </div>
                 <p className="text-sm text-muted" >
-                    &copy; {new Date().getFullYear()} EC-Auth. All rights reserver.
+                    &copy; {new Date().getFullYear()} EC-Auth. All rights reserved.
                 </p>
                 <p className="text-xs text-muted" >
                     Built for Stardance HackClub Event

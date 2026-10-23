@@ -14,6 +14,7 @@ import PublicRoute from "./PublicRoute.jsx"
 import ProctectedRoute from "./ProctedRoute.jsx"
 
 import MainLayout from "../Layout/MainLayout.jsx"
+import Home from "../pages/Home.jsx"
 
 export const router = createBrowserRouter([
     {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
                     {
                         path: "/docs",
                         element: <Docs/>
+                    },
+                    {
+                        path: "/home",
+                        element: <Home/>
                     }
                 ]
             },

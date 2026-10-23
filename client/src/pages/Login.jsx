@@ -52,10 +52,7 @@ export default function Login() {
         <main className="flex min-h-screen items-center justify-center
         bg-background px-4 py-10" >
             <section className="w-full max-w-md" >
-                <Link to="/" className="mb-8 flex items-center gap-3">
-                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-black" >
-                        <ShieldCheck size={24} />
-                    </span>
+                <Link to="/" className="mb-8 flex items-center gap-3 justify-center">
                     <span className="text-xl font-bold tracking-tight" >
                         EC-Auth
                     </span>
@@ -64,10 +61,7 @@ export default function Login() {
                     <h1 className="text-3xl font-bold tracking-tight" >
                         Welecome back
                     </h1>
-                    <p className="mt-2 text-sm text-muted" >
-                        Enter your Details to sign to your account
-                    </p>
-                    <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+                    <form onSubmit={handleSubmit} className="mt-8 space-y-5 flex flex-col ">
                         <div>
                             <label htmlFor="email" className="mb-2 text-sm font-medium">
                                 Email address

@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, NavLink, useNavigate } from "react-router-dom"
-import { ShieldCheck, LayoutDashboard, LogOut, FolderKanban, BookOpen } from "lucide-react"
+import { ShieldCheck, LayoutDashboard, LogOut, FolderKanban, BookOpen, HomeIcon } from "lucide-react"
 import { useAuth } from "../context/AuthContext.jsx"
 
 export default function Navbar() {
@@ -32,11 +32,18 @@ export default function Navbar() {
                 </Link>
                 <div className="absolute left-1/2 flex -transalte-x-1/2 items-center gap-4" >
                     <NavLink
+                        to="/home"
+                        className={navClass}
+                    >
+                        <HomeIcon size={18} />
+                        <span>Home</span>
+                    </NavLink>
+                    <NavLink
                         to="/dashboard"
                         className={navClass}
                     >
                         <LayoutDashboard size={18} />
-                        <span>Dashboard</span>
+                        <span>Profile</span>
                     </NavLink>
                     <NavLink
                         to="/projects"

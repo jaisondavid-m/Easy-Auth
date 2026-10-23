@@ -133,22 +133,7 @@ export default function Docs() {
     return (
         <main className="min-h-screen bg-background px-4 py-8 text-foreground sm:px-6 lg:px-8" >
             <div className="mx-auto max-w-7xl" >
-                <div className="mb-8 flex items-startt gap-4" >
-                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-accent/10 text-accent" >
-                        <BookOpen size={25} />
-                    </div>
-                    <div>
-                        <p className="text-sm font-semibold text-accent" >
-                            EC-AUTH FOR DEVELOPERS
-                        </p>
-                        <h1 className="mt-2 text-3xl font-bold tracking-tight" > 
-                            Connect your app to EC-Auth
-                        </h1>
-                        <p className="mt-3 max-w-2xl leading-7 text-muted" >
-                            Use EC-Auth to handle sign-up and login in your app. Follow the steps below to connect your project.
-                        </p>
-                    </div>
-                </div>
+                
                 <div className="grid gap-8 lg:grid-cols-[230px_minmax(0,1fr)]" >
                     <aside className="h-fit rounded-2xl border border-border bg-card p-4 lg:sticky lg:top-24" >
                         <nav className="space-y-1" >
@@ -168,7 +153,7 @@ export default function Docs() {
                             ))}
                         </nav>
                     </aside>
-                    <div className="min-w-0 rounded-2xl border broder-border bg-card px-5 sm:px-8" >
+                    <div className="min-w-0 rounded-2xl  broder-border bg-card px-5 sm:px-8" >
                         <Section
                             id="quick-start"
                             title="1. Quick start"
@@ -203,9 +188,6 @@ export default function Docs() {
                                         <p className="mt-2 text-sm leading-6 text-muted" >{item.text}</p>
                                     </div>
                                 ))}
-                            </div>
-                            <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 p-4 text-sm leading-6" >
-                                <strong>Before you start:</strong> Replace the sample backend URL and project ID with your own. Never put your JWT secret in frontend code.
                             </div>
                         </Section>
                         <Section
@@ -295,17 +277,6 @@ export default function Docs() {
                                 API authentication.
                             </p>
                         </Section>
-                        <div className="py-8" >
-                            <div className="flex items-start gap-3 rounded-xl border border-accent/20 bg-accent/5 p-4" >
-                                <ShieldCheck size={20} className="mt-0.5 shrink-0 text-accent" />
-                                <div>
-                                    <h3 className="font-semibold" >A few things to keep in mind</h3>
-                                    <p>
-                                        Use HTTPS in producation and check permissions on the backend. Never expose your JWT secret or database credentials in frontend code. For better security, avoid keeping long-lived tokens in `localStorage`
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
                     </div> 
                 </div>
             </div>

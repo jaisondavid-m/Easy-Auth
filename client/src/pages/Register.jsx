@@ -50,10 +50,7 @@ export default function Register() {
     return (
         <main className="flex min-h-screen items-center justify-center bg-background px-4 py-10" >
             <section className="w-full max-w-md" >
-                <Link to="/login" className="mb-8 flex items-center gap-3" >
-                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-black" >
-                        <ShieldCheck size={24} />
-                    </span>
+                <Link to="/login" className="mb-8 flex items-center gap-3 justify-center" >
                     <span
                         className="text-xl font-bold tracking-tight"
                     >
