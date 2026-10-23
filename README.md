@@ -12,10 +12,8 @@ Features:
 5. API integration - Connect EC-Auth to applications built with React, JS or others that can make HTTP requests.
 6. Simple integration - Use the API instead of implementing the entir authentication flow yourself
 
-What Security it provides:
-1. Never store passwords as plain text
-2. keep your application secrets
-3. Handle authentication tokens carefully and avoid exposing them in logs.
+Security:
+Password should never be stored as plain text. Keep database credentials and JWT secrets private and don't expose authentication tokens in log 
 
 
 ## To Run in your system:
@@ -23,3 +21,4 @@ What Security it provides:
 2. set envs for mysql db connection
 3. go to server directory and run `go run main.go`
 4. go to client directory and run `npm run dev`
+5. Before you need go and node environment
