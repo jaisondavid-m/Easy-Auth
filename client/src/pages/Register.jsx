@@ -36,7 +36,7 @@ export default function Register() {
                 email: form.email.trim(),
                 password: form.password,
             })
-            navigate("/dashboard", {replace: true})
+            navigate("/home", {replace: true})
         } catch (err) {
             setError(
                 err.response?.data?.error ||

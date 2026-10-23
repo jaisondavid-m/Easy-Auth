@@ -37,7 +37,7 @@ export default function Login() {
         try {
             await login(form)
             const destination = location.state?.from?.pathname;
-            navigate(destination || "/dashboard", {replace: true})
+            navigate(destination || "/home", {replace: true})
         } catch (err) {
             setError(
                 err.response?.data?.error ||
